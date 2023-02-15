@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GESTION_GYMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="abonnement">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="datedebut" Type="date" />
+    <Property Name="datefin" Type="date" />
+    <Property Name="tele_client" Type="varchar" MaxLength="10" />
+    <Property Name="code_facture" Type="int" />
+  </EntityType>
+  <EntityType Name="client">
+    <Key>
+      <PropertyRef Name="telephone" />
+    </Key>
+    <Property Name="nom" Type="varchar" MaxLength="100" />
+    <Property Name="prenom" Type="varchar" MaxLength="100" />
+    <Property Name="datenaissence" Type="date" />
+    <Property Name="telephone" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="id_salle" Type="int" />
+  </EntityType>
+  <EntityType Name="coach">
+    <Key>
+      <PropertyRef Name="telephone" />
+    </Key>
+    <Property Name="nom" Type="varchar" MaxLength="100" />
+    <Property Name="prenom" Type="varchar" MaxLength="100" />
+    <Property Name="ctaegorie" Type="varchar" MaxLength="100" />
+    <Property Name="telephone" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="prix" Type="money" />
+    <Property Name="id_salle" Type="int" />
+  </EntityType>
+  <EntityType Name="encadre">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tele_client" Type="varchar" MaxLength="10" />
+    <Property Name="tele_coach" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="facture">
+    <Key>
+      <PropertyRef Name="code_facture" />
+    </Key>
+    <Property Name="code_facture" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="prix" Type="money" />
+    <Property Name="categoreie" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="salle">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="100" />
+    <Property Name="nom" Type="varchar" MaxLength="100" />
+    <Property Name="nom_salle" Type="varchar" MaxLength="100" />
+    <Property Name="adresse" Type="varchar" MaxLength="200" />
+    <Property Name="code_postal" Type="int" />
+    <Property Name="ville" Type="varchar" MaxLength="100" />
+    <Property Name="motpasse" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <Association Name="FK_code_facture">
+    <End Role="facture" Type="Self.facture" Multiplicity="0..1" />
+    <End Role="abonnement" Type="Self.abonnement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="facture">
+        <PropertyRef Name="code_facture" />
+      </Principal>
+      <Dependent Role="abonnement">
+        <PropertyRef Name="code_facture" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_id_coach">
+    <End Role="salle" Type="Self.salle" Multiplicity="0..1" />
+    <End Role="coach" Type="Self.coach" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="salle">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="coach">
+        <PropertyRef Name="id_salle" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_id_salle">
+    <End Role="salle" Type="Self.salle" Multiplicity="0..1" />
+    <End Role="client" Type="Self.client" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="salle">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="client">
+        <PropertyRef Name="id_salle" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tele_clien">
+    <End Role="client" Type="Self.client" Multiplicity="0..1" />
+    <End Role="abonnement" Type="Self.abonnement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="client">
+        <PropertyRef Name="telephone" />
+      </Principal>
+      <Dependent Role="abonnement">
+        <PropertyRef Name="tele_client" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tele_client">
+    <End Role="client" Type="Self.client" Multiplicity="0..1" />
+    <End Role="encadre" Type="Self.encadre" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="client">
+        <PropertyRef Name="telephone" />
+      </Principal>
+      <Dependent Role="encadre">
+        <PropertyRef Name="tele_client" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tele_coach">
+    <End Role="coach" Type="Self.coach" Multiplicity="0..1" />
+    <End Role="encadre" Type="Self.encadre" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="coach">
+        <PropertyRef Name="telephone" />
+      </Principal>
+      <Dependent Role="encadre">
+        <PropertyRef Name="tele_coach" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="GESTION_GYMModelStoreContainer">
+    <EntitySet Name="abonnement" EntityType="Self.abonnement" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="client" EntityType="Self.client" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="coach" EntityType="Self.coach" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="encadre" EntityType="Self.encadre" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="facture" EntityType="Self.facture" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="salle" EntityType="Self.salle" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_code_facture" Association="Self.FK_code_facture">
+      <End Role="facture" EntitySet="facture" />
+      <End Role="abonnement" EntitySet="abonnement" />
+    </AssociationSet>
+    <AssociationSet Name="FK_id_coach" Association="Self.FK_id_coach">
+      <End Role="salle" EntitySet="salle" />
+      <End Role="coach" EntitySet="coach" />
+    </AssociationSet>
+    <AssociationSet Name="FK_id_salle" Association="Self.FK_id_salle">
+      <End Role="salle" EntitySet="salle" />
+      <End Role="client" EntitySet="client" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tele_clien" Association="Self.FK_tele_clien">
+      <End Role="client" EntitySet="client" />
+      <End Role="abonnement" EntitySet="abonnement" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tele_client" Association="Self.FK_tele_client">
+      <End Role="client" EntitySet="client" />
+      <End Role="encadre" EntitySet="encadre" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tele_coach" Association="Self.FK_tele_coach">
+      <End Role="coach" EntitySet="coach" />
+      <End Role="encadre" EntitySet="encadre" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

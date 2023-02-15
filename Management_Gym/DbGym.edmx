@@ -1,0 +1,877 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="GestionGymModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="abonner">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="datedebut" Type="date" />
+          <Property Name="datefin" Type="date" />
+          <Property Name="idmembere" Type="int" />
+          <Property Name="idabonnement" Type="int" />
+        </EntityType>
+        <EntityType Name="coach">
+          <Key>
+            <PropertyRef Name="id_coach" />
+          </Key>
+          <Property Name="id_coach" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom" Type="varchar" MaxLength="100" />
+          <Property Name="prenom" Type="varchar" MaxLength="100" />
+          <Property Name="numero" Type="varchar" MaxLength="10" />
+          <Property Name="sexe" Type="varchar" MaxLength="10" />
+          <Property Name="nom_sport" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="membere">
+          <Key>
+            <PropertyRef Name="id_membere" />
+          </Key>
+          <Property Name="id_membere" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom" Type="varchar" MaxLength="100" />
+          <Property Name="prenom" Type="varchar" MaxLength="100" />
+          <Property Name="datenaissence" Type="date" />
+          <Property Name="telephone" Type="varchar" MaxLength="10" />
+          <Property Name="sexe" Type="varchar" MaxLength="100" />
+          <Property Name="idsalle" Type="int" />
+        </EntityType>
+        <EntityType Name="offrir">
+          <Key>
+            <PropertyRef Name="id_offrire" />
+          </Key>
+          <Property Name="id_offrire" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="capacity" Type="int" />
+          <Property Name="numsalle" Type="int" />
+          <Property Name="numsport" Type="int" />
+        </EntityType>
+        <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'GestionGym.dbo.participer' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+        <EntityType Name="participer">
+          <Key>
+            <PropertyRef Name="id_participer" />
+          </Key>
+          <Property Name="id_participer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idsport" Type="int" />
+          <Property Name="idmembere" Type="int" />
+        </EntityType>
+        <EntityType Name="salle">
+          <Key>
+            <PropertyRef Name="id_salle" />
+          </Key>
+          <Property Name="id_salle" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="100" />
+          <Property Name="nom" Type="varchar" MaxLength="100" />
+          <Property Name="nom_salle" Type="varchar" MaxLength="100" />
+          <Property Name="motpasse" Type="varchar" MaxLength="100" />
+          <Property Name="Type" Type="varchar" MaxLength="50" />
+          <Property Name="Idadmin" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sport">
+          <Key>
+            <PropertyRef Name="id_sport" />
+          </Key>
+          <Property Name="id_sport" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom_sport" Type="varchar" MaxLength="100" />
+          <Property Name="ctaegorie" Type="varchar" MaxLength="100" />
+          <Property Name="idcoach" Type="int" />
+          <Property Name="tarif" Type="int" />
+        </EntityType>
+        <EntityType Name="type_abonnement">
+          <Key>
+            <PropertyRef Name="id_abonnement" />
+          </Key>
+          <Property Name="id_abonnement" Type="int" Nullable="false" />
+          <Property Name="duree" Type="int" />
+          <Property Name="tarifabonnement" Type="int" />
+        </EntityType>
+        <Association Name="FK_abonner_idabonnement">
+          <End Role="type_abonnement" Type="Self.type_abonnement" Multiplicity="0..1" />
+          <End Role="abonner" Type="Self.abonner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="type_abonnement">
+              <PropertyRef Name="id_abonnement" />
+            </Principal>
+            <Dependent Role="abonner">
+              <PropertyRef Name="idabonnement" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_abonner_idmemmbere">
+          <End Role="membere" Type="Self.membere" Multiplicity="0..1" />
+          <End Role="abonner" Type="Self.abonner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="membere">
+              <PropertyRef Name="id_membere" />
+            </Principal>
+            <Dependent Role="abonner">
+              <PropertyRef Name="idmembere" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_coach_id">
+          <End Role="coach" Type="Self.coach" Multiplicity="0..1" />
+          <End Role="sport" Type="Self.sport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="coach">
+              <PropertyRef Name="id_coach" />
+            </Principal>
+            <Dependent Role="sport">
+              <PropertyRef Name="idcoach" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_id_member">
+          <End Role="membere" Type="Self.membere" Multiplicity="0..1" />
+          <End Role="participer" Type="Self.participer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="membere">
+              <PropertyRef Name="id_membere" />
+            </Principal>
+            <Dependent Role="participer">
+              <PropertyRef Name="idmembere" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_id_salle">
+          <End Role="salle" Type="Self.salle" Multiplicity="0..1" />
+          <End Role="offrir" Type="Self.offrir" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="salle">
+              <PropertyRef Name="id_salle" />
+            </Principal>
+            <Dependent Role="offrir">
+              <PropertyRef Name="numsalle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_id_sport">
+          <End Role="sport" Type="Self.sport" Multiplicity="0..1" />
+          <End Role="offrir" Type="Self.offrir" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sport">
+              <PropertyRef Name="id_sport" />
+            </Principal>
+            <Dependent Role="offrir">
+              <PropertyRef Name="numsport" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_idsport">
+          <End Role="sport" Type="Self.sport" Multiplicity="0..1" />
+          <End Role="participer" Type="Self.participer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sport">
+              <PropertyRef Name="id_sport" />
+            </Principal>
+            <Dependent Role="participer">
+              <PropertyRef Name="idsport" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_member_idsalle">
+          <End Role="salle" Type="Self.salle" Multiplicity="0..1" />
+          <End Role="membere" Type="Self.membere" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="salle">
+              <PropertyRef Name="id_salle" />
+            </Principal>
+            <Dependent Role="membere">
+              <PropertyRef Name="idsalle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="modifer_member" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idsport" Type="int" Mode="In" />
+          <Parameter Name="idmember" Type="int" Mode="In" />
+          <Parameter Name="idabonnement" Type="int" Mode="In" />
+          <Parameter Name="datedebut" Type="date" Mode="In" />
+          <Parameter Name="datefin" Type="date" Mode="In" />
+          <Parameter Name="prix" Type="int" Mode="In" />
+        </Function>
+        <Function Name="N_M_P_S" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="info" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spGetactivemember" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spGetaddmember" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spGetemember" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spGetemembers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spGetfichierRenouvell" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spGetfichiersport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spGetinactivemember" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spGetinfocrystalreport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spGetmember" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idsalle" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spGetprixaujour" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spGetprixchoixsport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sport" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="spGetprixsport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sport" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="spGetsport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spmodificationtarif" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spRenouvelle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idsport" Type="int" Mode="In" />
+          <Parameter Name="idmember" Type="int" Mode="In" />
+          <Parameter Name="idabonnement" Type="int" Mode="In" />
+          <Parameter Name="datedebut" Type="date" Mode="In" />
+          <Parameter Name="dure" Type="int" Mode="In" />
+          <Parameter Name="prix" Type="int" Mode="In" />
+        </Function>
+        <Function Name="supp_coach" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nomsport" Type="varchar" Mode="In" />
+          <Parameter Name="info" Type="int" Mode="InOut" />
+        </Function>
+        <EntityContainer Name="GestionGymModelStoreContainer">
+          <EntitySet Name="abonner" EntityType="Self.abonner" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="coach" EntityType="Self.coach" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="membere" EntityType="Self.membere" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="offrir" EntityType="Self.offrir" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="salle" EntityType="Self.salle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sport" EntityType="Self.sport" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="type_abonnement" EntityType="Self.type_abonnement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="participer" EntityType="Self.participer" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [participer].[id_participer] AS [id_participer], 
+    [participer].[idsport] AS [idsport], 
+    [participer].[idmembere] AS [idmembere]
+    FROM [dbo].[participer] AS [participer]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_abonner_idabonnement" Association="Self.FK_abonner_idabonnement">
+            <End Role="type_abonnement" EntitySet="type_abonnement" />
+            <End Role="abonner" EntitySet="abonner" />
+          </AssociationSet>
+          <AssociationSet Name="FK_abonner_idmemmbere" Association="Self.FK_abonner_idmemmbere">
+            <End Role="membere" EntitySet="membere" />
+            <End Role="abonner" EntitySet="abonner" />
+          </AssociationSet>
+          <AssociationSet Name="FK_coach_id" Association="Self.FK_coach_id">
+            <End Role="coach" EntitySet="coach" />
+            <End Role="sport" EntitySet="sport" />
+          </AssociationSet>
+          <AssociationSet Name="FK_id_member" Association="Self.FK_id_member">
+            <End Role="membere" EntitySet="membere" />
+            <End Role="participer" EntitySet="participer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_id_salle" Association="Self.FK_id_salle">
+            <End Role="salle" EntitySet="salle" />
+            <End Role="offrir" EntitySet="offrir" />
+          </AssociationSet>
+          <AssociationSet Name="FK_id_sport" Association="Self.FK_id_sport">
+            <End Role="sport" EntitySet="sport" />
+            <End Role="offrir" EntitySet="offrir" />
+          </AssociationSet>
+          <AssociationSet Name="FK_idsport" Association="Self.FK_idsport">
+            <End Role="sport" EntitySet="sport" />
+            <End Role="participer" EntitySet="participer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_member_idsalle" Association="Self.FK_member_idsalle">
+            <End Role="salle" EntitySet="salle" />
+            <End Role="membere" EntitySet="membere" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GestionGymModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="GestionGymEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="modifer_member">
+            <Parameter Name="idsport" Mode="In" Type="Int32" />
+            <Parameter Name="idmember" Mode="In" Type="Int32" />
+            <Parameter Name="idabonnement" Mode="In" Type="Int32" />
+            <Parameter Name="datedebut" Mode="In" Type="DateTime" />
+            <Parameter Name="datefin" Mode="In" Type="DateTime" />
+            <Parameter Name="prix" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="N_M_P_S">
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="info" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(GestionGymModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(GestionGymModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="spGetactivemember" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="spGetaddmember" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="spGetemember" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="spGetemembers" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="spGetfichierRenouvell" ReturnType="Collection(GestionGymModel.spGetfichierRenouvell_Result)" />
+          <FunctionImport Name="spGetfichiersport" ReturnType="Collection(GestionGymModel.spGetfichiersport_Result)" />
+          <FunctionImport Name="spGetinactivemember" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="spGetmember" ReturnType="Collection(GestionGymModel.spGetmember_Result)" >
+          <Parameter Name="idsalle" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spGetprixaujour" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="spGetprixchoixsport" ReturnType="Collection(Int32)">
+          <Parameter Name="sport" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spGetprixsport" ReturnType="Collection(Int32)">
+          <Parameter Name="sport" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spGetsport" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="spmodificationtarif" />
+          <FunctionImport Name="spRenouvelle">
+            <Parameter Name="idsport" Mode="In" Type="Int32" />
+            <Parameter Name="idmember" Mode="In" Type="Int32" />
+            <Parameter Name="idabonnement" Mode="In" Type="Int32" />
+            <Parameter Name="datedebut" Mode="In" Type="DateTime" />
+            <Parameter Name="dure" Mode="In" Type="Int32" />
+            <Parameter Name="prix" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="supp_coach">
+            <Parameter Name="nomsport" Mode="In" Type="String" />
+            <Parameter Name="info" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spGetinfocrystalreport" ReturnType="Collection(GestionGymModel.spGetinfocrystalreport_Result)" />
+          <EntitySet Name="abonners" EntityType="GestionGymModel.abonner" />
+          <EntitySet Name="coaches" EntityType="GestionGymModel.coach" />
+          <EntitySet Name="memberes" EntityType="GestionGymModel.membere" />
+          <EntitySet Name="offrirs" EntityType="GestionGymModel.offrir" />
+          <EntitySet Name="salles" EntityType="GestionGymModel.salle" />
+          <EntitySet Name="sports" EntityType="GestionGymModel.sport" />
+          <EntitySet Name="type_abonnement" EntityType="GestionGymModel.type_abonnement" />
+          <EntitySet Name="participers" EntityType="GestionGymModel.participer" />
+          <AssociationSet Name="FK_abonner_idabonnement" Association="GestionGymModel.FK_abonner_idabonnement">
+            <End Role="type_abonnement" EntitySet="type_abonnement" />
+            <End Role="abonner" EntitySet="abonners" />
+          </AssociationSet>
+          <AssociationSet Name="FK_abonner_idmemmbere" Association="GestionGymModel.FK_abonner_idmemmbere">
+            <End Role="membere" EntitySet="memberes" />
+            <End Role="abonner" EntitySet="abonners" />
+          </AssociationSet>
+          <AssociationSet Name="FK_coach_id" Association="GestionGymModel.FK_coach_id">
+            <End Role="coach" EntitySet="coaches" />
+            <End Role="sport" EntitySet="sports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_id_member" Association="GestionGymModel.FK_id_member">
+            <End Role="membere" EntitySet="memberes" />
+            <End Role="participer" EntitySet="participers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_member_idsalle" Association="GestionGymModel.FK_member_idsalle">
+            <End Role="salle" EntitySet="salles" />
+            <End Role="membere" EntitySet="memberes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_id_salle" Association="GestionGymModel.FK_id_salle">
+            <End Role="salle" EntitySet="salles" />
+            <End Role="offrir" EntitySet="offrirs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_id_sport" Association="GestionGymModel.FK_id_sport">
+            <End Role="sport" EntitySet="sports" />
+            <End Role="offrir" EntitySet="offrirs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_idsport" Association="GestionGymModel.FK_idsport">
+            <End Role="sport" EntitySet="sports" />
+            <End Role="participer" EntitySet="participers" />
+          </AssociationSet>
+        </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="spGetfichierRenouvell_Result">
+          <Property Type="String" Name="prenom" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="nom" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="nom_sport" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="duree" Nullable="true" />
+          <Property Type="Int32" Name="tarif" Nullable="true" />
+          <Property Type="Int32" Name="id_sport" Nullable="false" />
+          <Property Type="Int32" Name="idabonnement" Nullable="true" />
+          <Property Type="Int32" Name="id_membere" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="spGetfichiersport_Result">
+          <Property Type="Int32" Name="id_sport" Nullable="false" />
+          <Property Type="String" Name="nom_sport" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ctaegorie" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="capacity" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spGetmember_Result">
+          <Property Type="String" Name="prenom" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="nom" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="datenaissence" Nullable="true" />
+          <Property Type="String" Name="telephone" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="sexe" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="nom_sport" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="id_membere" Nullable="false" />
+          <Property Type="DateTime" Name="datedebut" Nullable="true" />
+          <Property Type="DateTime" Name="datefin" Nullable="true" />
+          <Property Type="Int32" Name="duree" Nullable="true" />
+          <Property Type="Int32" Name="tarifabonnement" Nullable="true" />
+          <Property Type="Int32" Name="idabonnement" Nullable="true" />
+          <Property Type="Int32" Name="id_sport" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="spGetinfocrystalreport_Result">
+          <Property Type="String" Name="nom" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="prenom" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="nom_sport" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="datefin" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="abonner">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="datedebut" Type="DateTime" Precision="0" />
+          <Property Name="datefin" Type="DateTime" Precision="0" />
+          <Property Name="idmembere" Type="Int32" />
+          <Property Name="idabonnement" Type="Int32" />
+          <NavigationProperty Name="type_abonnement" Relationship="GestionGymModel.FK_abonner_idabonnement" FromRole="abonner" ToRole="type_abonnement" />
+          <NavigationProperty Name="membere" Relationship="GestionGymModel.FK_abonner_idmemmbere" FromRole="abonner" ToRole="membere" />
+        </EntityType>
+        <EntityType Name="coach">
+          <Key>
+            <PropertyRef Name="id_coach" />
+          </Key>
+          <Property Name="id_coach" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="prenom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="numero" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="sexe" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="nom_sport" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="sports" Relationship="GestionGymModel.FK_coach_id" FromRole="coach" ToRole="sport" />
+        </EntityType>
+        <EntityType Name="membere">
+          <Key>
+            <PropertyRef Name="id_membere" />
+          </Key>
+          <Property Name="id_membere" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="prenom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="datenaissence" Type="DateTime" Precision="0" />
+          <Property Name="telephone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="sexe" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="idsalle" Type="Int32" />
+          <NavigationProperty Name="abonners" Relationship="GestionGymModel.FK_abonner_idmemmbere" FromRole="membere" ToRole="abonner" />
+          <NavigationProperty Name="participers" Relationship="GestionGymModel.FK_id_member" FromRole="membere" ToRole="participer" />
+          <NavigationProperty Name="salle" Relationship="GestionGymModel.FK_member_idsalle" FromRole="membere" ToRole="salle" />
+        </EntityType>
+        <EntityType Name="offrir">
+          <Key>
+            <PropertyRef Name="id_offrire" />
+          </Key>
+          <Property Name="id_offrire" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="capacity" Type="Int32" />
+          <Property Name="numsalle" Type="Int32" />
+          <Property Name="numsport" Type="Int32" />
+          <NavigationProperty Name="salle" Relationship="GestionGymModel.FK_id_salle" FromRole="offrir" ToRole="salle" />
+          <NavigationProperty Name="sport" Relationship="GestionGymModel.FK_id_sport" FromRole="offrir" ToRole="sport" />
+        </EntityType>
+        <EntityType Name="salle">
+          <Key>
+            <PropertyRef Name="id_salle" />
+          </Key>
+          <Property Name="id_salle" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="nom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="nom_salle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="motpasse" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Idadmin" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="memberes" Relationship="GestionGymModel.FK_member_idsalle" FromRole="salle" ToRole="membere" />
+          <NavigationProperty Name="offrirs" Relationship="GestionGymModel.FK_id_salle" FromRole="salle" ToRole="offrir" />
+        </EntityType>
+        <EntityType Name="sport">
+          <Key>
+            <PropertyRef Name="id_sport" />
+          </Key>
+          <Property Name="id_sport" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom_sport" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ctaegorie" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="idcoach" Type="Int32" />
+          <Property Name="tarif" Type="Int32" />
+          <NavigationProperty Name="coach" Relationship="GestionGymModel.FK_coach_id" FromRole="sport" ToRole="coach" />
+          <NavigationProperty Name="offrirs" Relationship="GestionGymModel.FK_id_sport" FromRole="sport" ToRole="offrir" />
+          <NavigationProperty Name="participers" Relationship="GestionGymModel.FK_idsport" FromRole="sport" ToRole="participer" />
+        </EntityType>
+        <EntityType Name="type_abonnement">
+          <Key>
+            <PropertyRef Name="id_abonnement" />
+          </Key>
+          <Property Name="id_abonnement" Type="Int32" Nullable="false" />
+          <Property Name="duree" Type="Int32" />
+          <Property Name="tarifabonnement" Type="Int32" />
+          <NavigationProperty Name="abonners" Relationship="GestionGymModel.FK_abonner_idabonnement" FromRole="type_abonnement" ToRole="abonner" />
+        </EntityType>
+        <EntityType Name="participer">
+          <Key>
+            <PropertyRef Name="id_participer" />
+          </Key>
+          <Property Name="id_participer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idsport" Type="Int32" />
+          <Property Name="idmembere" Type="Int32" />
+          <NavigationProperty Name="membere" Relationship="GestionGymModel.FK_id_member" FromRole="participer" ToRole="membere" />
+          <NavigationProperty Name="sport" Relationship="GestionGymModel.FK_idsport" FromRole="participer" ToRole="sport" />
+        </EntityType>
+        <Association Name="FK_abonner_idabonnement">
+          <End Type="GestionGymModel.type_abonnement" Role="type_abonnement" Multiplicity="0..1" />
+          <End Type="GestionGymModel.abonner" Role="abonner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="type_abonnement">
+              <PropertyRef Name="id_abonnement" />
+            </Principal>
+            <Dependent Role="abonner">
+              <PropertyRef Name="idabonnement" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_abonner_idmemmbere">
+          <End Type="GestionGymModel.membere" Role="membere" Multiplicity="0..1" />
+          <End Type="GestionGymModel.abonner" Role="abonner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="membere">
+              <PropertyRef Name="id_membere" />
+            </Principal>
+            <Dependent Role="abonner">
+              <PropertyRef Name="idmembere" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_coach_id">
+          <End Type="GestionGymModel.coach" Role="coach" Multiplicity="0..1" />
+          <End Type="GestionGymModel.sport" Role="sport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="coach">
+              <PropertyRef Name="id_coach" />
+            </Principal>
+            <Dependent Role="sport">
+              <PropertyRef Name="idcoach" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_id_member">
+          <End Type="GestionGymModel.membere" Role="membere" Multiplicity="0..1" />
+          <End Type="GestionGymModel.participer" Role="participer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="membere">
+              <PropertyRef Name="id_membere" />
+            </Principal>
+            <Dependent Role="participer">
+              <PropertyRef Name="idmembere" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_member_idsalle">
+          <End Type="GestionGymModel.salle" Role="salle" Multiplicity="0..1" />
+          <End Type="GestionGymModel.membere" Role="membere" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="salle">
+              <PropertyRef Name="id_salle" />
+            </Principal>
+            <Dependent Role="membere">
+              <PropertyRef Name="idsalle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_id_salle">
+          <End Type="GestionGymModel.salle" Role="salle" Multiplicity="0..1" />
+          <End Type="GestionGymModel.offrir" Role="offrir" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="salle">
+              <PropertyRef Name="id_salle" />
+            </Principal>
+            <Dependent Role="offrir">
+              <PropertyRef Name="numsalle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_id_sport">
+          <End Type="GestionGymModel.sport" Role="sport" Multiplicity="0..1" />
+          <End Type="GestionGymModel.offrir" Role="offrir" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sport">
+              <PropertyRef Name="id_sport" />
+            </Principal>
+            <Dependent Role="offrir">
+              <PropertyRef Name="numsport" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_idsport">
+          <End Type="GestionGymModel.sport" Role="sport" Multiplicity="0..1" />
+          <End Type="GestionGymModel.participer" Role="participer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sport">
+              <PropertyRef Name="id_sport" />
+            </Principal>
+            <Dependent Role="participer">
+              <PropertyRef Name="idsport" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GestionGymModelStoreContainer" CdmEntityContainer="GestionGymEntities">
+          <FunctionImportMapping FunctionImportName="modifer_member" FunctionName="GestionGymModel.Store.modifer_member" />
+          <FunctionImportMapping FunctionImportName="N_M_P_S" FunctionName="GestionGymModel.Store.N_M_P_S" />
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="GestionGymModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="GestionGymModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="GestionGymModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="GestionGymModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GestionGymModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="GestionGymModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GestionGymModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="GestionGymModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="GestionGymModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="spGetactivemember" FunctionName="GestionGymModel.Store.spGetactivemember" />
+          <FunctionImportMapping FunctionImportName="spGetaddmember" FunctionName="GestionGymModel.Store.spGetaddmember" />
+          <FunctionImportMapping FunctionImportName="spGetemember" FunctionName="GestionGymModel.Store.spGetemember" />
+          <FunctionImportMapping FunctionImportName="spGetemembers" FunctionName="GestionGymModel.Store.spGetemembers" />
+          <FunctionImportMapping FunctionImportName="spGetfichierRenouvell" FunctionName="GestionGymModel.Store.spGetfichierRenouvell">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GestionGymModel.spGetfichierRenouvell_Result">
+                <ScalarProperty Name="prenom" ColumnName="prenom" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="nom_sport" ColumnName="nom_sport" />
+                <ScalarProperty Name="duree" ColumnName="duree" />
+                <ScalarProperty Name="tarif" ColumnName="tarif" />
+                <ScalarProperty Name="id_sport" ColumnName="id_sport" />
+                <ScalarProperty Name="idabonnement" ColumnName="idabonnement" />
+                <ScalarProperty Name="id_membere" ColumnName="id_membere" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spGetfichiersport" FunctionName="GestionGymModel.Store.spGetfichiersport">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GestionGymModel.spGetfichiersport_Result">
+                <ScalarProperty Name="id_sport" ColumnName="id_sport" />
+                <ScalarProperty Name="nom_sport" ColumnName="nom_sport" />
+                <ScalarProperty Name="ctaegorie" ColumnName="ctaegorie" />
+                <ScalarProperty Name="capacity" ColumnName="capacity" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spGetinactivemember" FunctionName="GestionGymModel.Store.spGetinactivemember" />
+          <FunctionImportMapping FunctionImportName="spGetmember" FunctionName="GestionGymModel.Store.spGetmember">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GestionGymModel.spGetmember_Result">
+                <ScalarProperty Name="prenom" ColumnName="prenom" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="datenaissence" ColumnName="datenaissence" />
+                <ScalarProperty Name="telephone" ColumnName="telephone" />
+                <ScalarProperty Name="sexe" ColumnName="sexe" />
+                <ScalarProperty Name="nom_sport" ColumnName="nom_sport" />
+                <ScalarProperty Name="id_membere" ColumnName="id_membere" />
+                <ScalarProperty Name="datedebut" ColumnName="datedebut" />
+                <ScalarProperty Name="datefin" ColumnName="datefin" />
+                <ScalarProperty Name="duree" ColumnName="duree" />
+                <ScalarProperty Name="tarifabonnement" ColumnName="tarifabonnement" />
+                <ScalarProperty Name="idabonnement" ColumnName="idabonnement" />
+                <ScalarProperty Name="id_sport" ColumnName="id_sport" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spGetprixaujour" FunctionName="GestionGymModel.Store.spGetprixaujour" />
+          <FunctionImportMapping FunctionImportName="spGetprixchoixsport" FunctionName="GestionGymModel.Store.spGetprixchoixsport" />
+          <FunctionImportMapping FunctionImportName="spGetprixsport" FunctionName="GestionGymModel.Store.spGetprixsport" />
+          <FunctionImportMapping FunctionImportName="spGetsport" FunctionName="GestionGymModel.Store.spGetsport" />
+          <FunctionImportMapping FunctionImportName="spmodificationtarif" FunctionName="GestionGymModel.Store.spmodificationtarif" />
+          <FunctionImportMapping FunctionImportName="spRenouvelle" FunctionName="GestionGymModel.Store.spRenouvelle" />
+          <FunctionImportMapping FunctionImportName="supp_coach" FunctionName="GestionGymModel.Store.supp_coach" />
+          <FunctionImportMapping FunctionImportName="spGetinfocrystalreport" FunctionName="GestionGymModel.Store.spGetinfocrystalreport">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GestionGymModel.spGetinfocrystalreport_Result">
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="prenom" ColumnName="prenom" />
+                <ScalarProperty Name="nom_sport" ColumnName="nom_sport" />
+                <ScalarProperty Name="datefin" ColumnName="datefin" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="abonners">
+            <EntityTypeMapping TypeName="GestionGymModel.abonner">
+              <MappingFragment StoreEntitySet="abonner">
+                <ScalarProperty Name="idabonnement" ColumnName="idabonnement" />
+                <ScalarProperty Name="idmembere" ColumnName="idmembere" />
+                <ScalarProperty Name="datefin" ColumnName="datefin" />
+                <ScalarProperty Name="datedebut" ColumnName="datedebut" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="coaches">
+            <EntityTypeMapping TypeName="GestionGymModel.coach">
+              <MappingFragment StoreEntitySet="coach">
+                <ScalarProperty Name="nom_sport" ColumnName="nom_sport" />
+                <ScalarProperty Name="sexe" ColumnName="sexe" />
+                <ScalarProperty Name="numero" ColumnName="numero" />
+                <ScalarProperty Name="prenom" ColumnName="prenom" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="id_coach" ColumnName="id_coach" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="memberes">
+            <EntityTypeMapping TypeName="GestionGymModel.membere">
+              <MappingFragment StoreEntitySet="membere">
+                <ScalarProperty Name="idsalle" ColumnName="idsalle" />
+                <ScalarProperty Name="sexe" ColumnName="sexe" />
+                <ScalarProperty Name="telephone" ColumnName="telephone" />
+                <ScalarProperty Name="datenaissence" ColumnName="datenaissence" />
+                <ScalarProperty Name="prenom" ColumnName="prenom" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="id_membere" ColumnName="id_membere" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="offrirs">
+            <EntityTypeMapping TypeName="GestionGymModel.offrir">
+              <MappingFragment StoreEntitySet="offrir">
+                <ScalarProperty Name="numsport" ColumnName="numsport" />
+                <ScalarProperty Name="numsalle" ColumnName="numsalle" />
+                <ScalarProperty Name="capacity" ColumnName="capacity" />
+                <ScalarProperty Name="id_offrire" ColumnName="id_offrire" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="salles">
+            <EntityTypeMapping TypeName="GestionGymModel.salle">
+              <MappingFragment StoreEntitySet="salle">
+                <ScalarProperty Name="Idadmin" ColumnName="Idadmin" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="motpasse" ColumnName="motpasse" />
+                <ScalarProperty Name="nom_salle" ColumnName="nom_salle" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="id_salle" ColumnName="id_salle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sports">
+            <EntityTypeMapping TypeName="GestionGymModel.sport">
+              <MappingFragment StoreEntitySet="sport">
+                <ScalarProperty Name="tarif" ColumnName="tarif" />
+                <ScalarProperty Name="idcoach" ColumnName="idcoach" />
+                <ScalarProperty Name="ctaegorie" ColumnName="ctaegorie" />
+                <ScalarProperty Name="nom_sport" ColumnName="nom_sport" />
+                <ScalarProperty Name="id_sport" ColumnName="id_sport" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="type_abonnement">
+            <EntityTypeMapping TypeName="GestionGymModel.type_abonnement">
+              <MappingFragment StoreEntitySet="type_abonnement">
+                <ScalarProperty Name="tarifabonnement" ColumnName="tarifabonnement" />
+                <ScalarProperty Name="duree" ColumnName="duree" />
+                <ScalarProperty Name="id_abonnement" ColumnName="id_abonnement" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="participers">
+            <EntityTypeMapping TypeName="GestionGymModel.participer">
+              <MappingFragment StoreEntitySet="participer">
+                <ScalarProperty Name="idmembere" ColumnName="idmembere" />
+                <ScalarProperty Name="idsport" ColumnName="idsport" />
+                <ScalarProperty Name="id_participer" ColumnName="id_participer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

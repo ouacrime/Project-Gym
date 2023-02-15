@@ -1,0 +1,1033 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{662BF4C0-A946-487A-A46F-ED25891BD456}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Management_Gym</RootNamespace>
+    <AssemblyName>Management_Gym</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AxShockwaveFlashObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="Bunifu_UI_v1.52">
+      <HintPath>..\..\..\Bunifo\Bunifu_UI_v1.52.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.150.1484.0\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.150.1484.0\lib\net40\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Design, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.150.1484.0\lib\net40\Microsoft.ReportViewer.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.150.1484.0\lib\net40\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebDesign, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.150.1484.0\lib\net40\Microsoft.ReportViewer.WebDesign.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.150.1484.0\lib\net40\Microsoft.ReportViewer.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Microsoft.ReportViewer.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="QRCoder, Version=1.4.3.0, Culture=neutral, PublicKeyToken=c4ed5b9ae8358a28, processorArchitecture=MSIL">
+      <HintPath>packages\QRCoder.1.4.3\lib\net40\QRCoder.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\System.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="abonner.cs">
+      <DependentUpon>DbGym.tt</DependentUpon>
+    </Compile>
+    <Compile Include="coach.cs">
+      <DependentUpon>DbGym.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CrystalReport\CrystalReportFicherMember.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CrystalReportFicherMember.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CrystalReport\DataSetCrystal.cs">
+      <DependentUpon>DataSetCrystal.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="CrystalReport\DataSetCrystal.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSetCrystal.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="CrystalReport\FormCrystalReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CrystalReport\FormCrystalReport.Designer.cs">
+      <DependentUpon>FormCrystalReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="etatimprima.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="etatimprima.Designer.cs">
+      <DependentUpon>etatimprima.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GestionGymDataSet.cs">
+      <DependentUpon>GestionGymDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="GestionGymDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GestionGymDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="GestionGymDataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GestionGymDataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="spGetfichierRenouvell_Result.cs">
+      <DependentUpon>DbGym.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spGetfichiersport_Result.cs">
+      <DependentUpon>DbGym.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spGetinfocrystalreport_Result.cs">
+      <DependentUpon>DbGym.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spGetmember_Result.cs">
+      <DependentUpon>DbGym.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>DbGym.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagrams_Result.cs">
+      <DependentUpon>DbGym.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SqlServerTypes\Loader.cs" />
+    <Compile Include="TC\DbCoach.cs" />
+    <Compile Include="TC\DBconexion.cs" />
+    <Compile Include="DbGym.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DbGym.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbGym.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DbGym.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbGym.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DbGym.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="TC\Dbhome.cs" />
+    <Compile Include="TC\DbMembere.cs" />
+    <Compile Include="TC\DBSalle.cs" />
+    <Compile Include="ForgotPassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ForgotPassword.Designer.cs">
+      <DependentUpon>ForgotPassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TC\DBsport.cs" />
+    <Compile Include="TC\MainControlClasse.cs" />
+    <Compile Include="membere.cs">
+      <DependentUpon>DbGym.tt</DependentUpon>
+    </Compile>
+    <Compile Include="offrir.cs">
+      <DependentUpon>DbGym.tt</DependentUpon>
+    </Compile>
+    <Compile Include="participer.cs">
+      <DependentUpon>DbGym.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RJControl\RJtoggeleButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="salle.cs">
+      <DependentUpon>DbGym.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sport.cs">
+      <DependentUpon>DbGym.tt</DependentUpon>
+    </Compile>
+    <Compile Include="type_abonnement.cs">
+      <DependentUpon>DbGym.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlAddCoach.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlAddCoach.Designer.cs">
+      <DependentUpon>UserControlAddCoach.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlAfficherCoach.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlAfficherCoach.Designer.cs">
+      <DependentUpon>UserControlAfficherCoach.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlChangePassword.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlChangePassword.Designer.cs">
+      <DependentUpon>UserControlChangePassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlCoach.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlCoach.Designer.cs">
+      <DependentUpon>UserControlCoach.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlAbonnement.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlAbonnement.Designer.cs">
+      <DependentUpon>UserControlAbonnement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlFicheMember.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlFicheMember.Designer.cs">
+      <DependentUpon>UserControlFicheMember.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlHome.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlHome.Designer.cs">
+      <DependentUpon>UserControlHome.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlModCoach.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlModCoach.Designer.cs">
+      <DependentUpon>UserControlModCoach.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlModiferMember.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlModiferMember.Designer.cs">
+      <DependentUpon>UserControlModiferMember.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlSport.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlSport.Designer.cs">
+      <DependentUpon>UserControlSport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlStatistique.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlStatistique.Designer.cs">
+      <DependentUpon>UserControlStatistique.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlSupMembere.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlSupMembere.Designer.cs">
+      <DependentUpon>UserControlSupMembere.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlSupCaoch.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlSupCaoch.Designer.cs">
+      <DependentUpon>UserControlSupCaoch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControlUtilisateur.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlUtilisateur.Designer.cs">
+      <DependentUpon>UserControlUtilisateur.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl_addmember.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControl_addmember.Designer.cs">
+      <DependentUpon>UserControl_addmember.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl_Members.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControl_Members.Designer.cs">
+      <DependentUpon>UserControl_Members.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User_CreeCompte.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="User_CreeCompte.Designer.cs">
+      <DependentUpon>User_CreeCompte.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Menu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Menu.Designer.cs">
+      <DependentUpon>Menu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CrystalReport\CrystalReportFicherMember.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CrystalReportFicherMember.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CrystalReport\FormCrystalReport.resx">
+      <DependentUpon>FormCrystalReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="etatimprima.resx">
+      <DependentUpon>etatimprima.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ForgotPassword.resx">
+      <DependentUpon>ForgotPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlAddCoach.resx">
+      <DependentUpon>UserControlAddCoach.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlAfficherCoach.resx">
+      <DependentUpon>UserControlAfficherCoach.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlChangePassword.resx">
+      <DependentUpon>UserControlChangePassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlCoach.resx">
+      <DependentUpon>UserControlCoach.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlAbonnement.resx">
+      <DependentUpon>UserControlAbonnement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlFicheMember.resx">
+      <DependentUpon>UserControlFicheMember.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlHome.resx">
+      <DependentUpon>UserControlHome.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlModCoach.resx">
+      <DependentUpon>UserControlModCoach.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlModiferMember.resx">
+      <DependentUpon>UserControlModiferMember.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlSport.resx">
+      <DependentUpon>UserControlSport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlStatistique.resx">
+      <DependentUpon>UserControlStatistique.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlSupMembere.resx">
+      <DependentUpon>UserControlSupMembere.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlSupCaoch.resx">
+      <DependentUpon>UserControlSupCaoch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlUtilisateur.resx">
+      <DependentUpon>UserControlUtilisateur.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl_addmember.resx">
+      <DependentUpon>UserControl_addmember.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl_Members.resx">
+      <DependentUpon>UserControl_Members.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User_CreeCompte.resx">
+      <DependentUpon>User_CreeCompte.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Menu.resx">
+      <DependentUpon>Menu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EntityDeploy Include="DbGym.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DbGym.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="CrystalReport\DataSetCrystal.xsc">
+      <DependentUpon>DataSetCrystal.xsd</DependentUpon>
+    </None>
+    <None Include="CrystalReport\DataSetCrystal.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSetCrystal.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="CrystalReport\DataSetCrystal.xss">
+      <DependentUpon>DataSetCrystal.xsd</DependentUpon>
+    </None>
+    <None Include="DbGym.edmx.diagram">
+      <DependentUpon>DbGym.edmx</DependentUpon>
+    </None>
+    <None Include="GestionGymDataSet.xsc">
+      <DependentUpon>GestionGymDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="GestionGymDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GestionGymDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="GestionGymDataSet.xss">
+      <DependentUpon>GestionGymDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="GestionGymDataSet1.xsc">
+      <DependentUpon>GestionGymDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="GestionGymDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GestionGymDataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="GestionGymDataSet1.xss">
+      <DependentUpon>GestionGymDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\Actions-list-add-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\add %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\address-book %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\address-book.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\add-user-3-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\adresse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\analytics-2-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\Button-Delete-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\Categorie.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\Categorize_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\Close-2-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\closebtn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\closethick.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\conference-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\Connected_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\connectmode.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\Copier.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\Country_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\customer-service-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\deconnect.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\Deconnecte.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\DefaultImage.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\delete-property-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\disapprove-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\Download.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\dumbbell-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\Excel-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\exit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\gmail.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\Gmail_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\gym %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\gym.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\icons8-barbell-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\icons8-coworking-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\icons8-stack-of-money-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\ImpriCanon.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\Imprimer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\k.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\login_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\MainLogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\Menu_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\minimize.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\minimizeicon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\Motdepasse_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\Office-Client-Male-Light-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\Phone_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\Pictures-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\print-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\prix_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\product_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\Quantie_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\Recycle-iconaaa.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\Refresh-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\save-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\save-641.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\save-as-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\search %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\search-3-64 %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\Settings_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\shop-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\shop-cart-add-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\shopping-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\Shutdown_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\SM-T580NZKAXAR-02-71016.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\Subtract_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\totalclients.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\trash %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\trash.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\unlock-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\user-add %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\user-add %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\user-add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\users %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\users.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\ville_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\chart-histogram %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\chart-histogram.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Actions-list-add-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\address-book %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\address-book.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add-user-3-641.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\adresse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\analytics-2-641.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Button-Delete-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Categorie.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Categorize_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chart-histogram %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chart-histogram.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Close-2-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\closebtn1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\closethick1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\conference-641.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Connected_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\connectmode.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Copier.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Country_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\customer-service-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\deconnect.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Deconnecte.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DefaultImage1.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delete-property-641.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\disapprove-641.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dollar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Download.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dumbbell-641.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Excel-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\exit1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gmail1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Gmail_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gym %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gym.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-barbell-481.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-coworking-481.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-stack-of-money-481.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\id-card.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImpriCanon.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Imprimer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\k.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\key %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\key.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\login_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MainLogo1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\map-marker %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\map-marker.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\marker.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Menu_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\minimize1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\minimizeicon1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Motdepasse_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Office-Client-Male-Light-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Phone_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pictures-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\plus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\print-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\prix_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\product_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Quantie_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Recycle-iconaaa.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refresh1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Refresh-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save-642.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save-6411.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save-as-641.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search-3-64 %281%291.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\settings1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Settings_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shop-641.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shop-cart-add-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shopping-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Shutdown_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Subtract_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\totalclients1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\trash %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\trash.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\unlock-641.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user-add %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user-add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\users %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\users.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ville_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\angle-left.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PH\apps %281%29.png" />
+    <None Include="PH\apps-free-icon-font.png" />
+    <None Include="PH\user-add-free-icon-font.png" />
+    <None Include="PH\users-alt-free-icon-font.png" />
+    <None Include="PH\home %281%29.png" />
+    <None Include="PH\home.png" />
+    <None Include="PH\menu-burger.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DbGym.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DbGym.edmx</DependentUpon>
+      <LastGenOutput>DbGym.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DbGym.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DbGym.edmx</DependentUpon>
+      <LastGenOutput>DbGym.cs</LastGenOutput>
+    </Content>
+    <Content Include="SqlServerTypes\readme.htm" />
+    <Content Include="SqlServerTypes\x64\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="PH\minus-free-icon-font.png" />
+    <None Include="PH\cross-free-icon-font.png" />
+    <None Include="PH\settings-free-icon-font.png" />
+    <None Include="PH\icons8-haltère-64.png" />
+    <None Include="PH\gym-free-icon-font.png" />
+    <None Include="PH\chart-histogram-free-icon-font.png" />
+    <None Include="PH\address-book-free-icon-font.png" />
+    <None Include="PH\users-free-icon-font.png" />
+    <None Include="PH\home-free-icon-font.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

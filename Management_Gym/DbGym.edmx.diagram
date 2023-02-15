@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f411941ac286433bbea111cacddd044f" Name="Diagram1" ZoomLevel="66">
+        <EntityTypeShape EntityType="GestionGymModel.abonner" Width="1.5" PointX="5.25" PointY="7.75" />
+        <EntityTypeShape EntityType="GestionGymModel.coach" Width="1.5" PointX="0.75" PointY="3.5" />
+        <EntityTypeShape EntityType="GestionGymModel.membere" Width="1.5" PointX="3" PointY="7.375" />
+        <EntityTypeShape EntityType="GestionGymModel.offrir" Width="1.5" PointX="5.25" PointY="3.625" />
+        <EntityTypeShape EntityType="GestionGymModel.salle" Width="1.5" PointX="0.75" PointY="7.5" />
+        <EntityTypeShape EntityType="GestionGymModel.sport" Width="1.5" PointX="3" PointY="3.5" />
+        <EntityTypeShape EntityType="GestionGymModel.type_abonnement" Width="1.5" PointX="3" PointY="12" />
+        <EntityTypeShape EntityType="GestionGymModel.participer" Width="1.5" PointX="5.25" PointY="0.75" />
+        <AssociationConnector Association="GestionGymModel.FK_abonner_idabonnement" />
+        <AssociationConnector Association="GestionGymModel.FK_abonner_idmemmbere" />
+        <AssociationConnector Association="GestionGymModel.FK_coach_id" />
+        <AssociationConnector Association="GestionGymModel.FK_id_member" />
+        <AssociationConnector Association="GestionGymModel.FK_member_idsalle" />
+        <AssociationConnector Association="GestionGymModel.FK_id_salle" />
+        <AssociationConnector Association="GestionGymModel.FK_id_sport" />
+        <AssociationConnector Association="GestionGymModel.FK_idsport" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

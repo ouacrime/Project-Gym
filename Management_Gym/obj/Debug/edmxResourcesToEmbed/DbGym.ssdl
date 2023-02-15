@@ -1,0 +1,304 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GestionGymModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="abonner">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="datedebut" Type="date" />
+    <Property Name="datefin" Type="date" />
+    <Property Name="idmembere" Type="int" />
+    <Property Name="idabonnement" Type="int" />
+  </EntityType>
+  <EntityType Name="coach">
+    <Key>
+      <PropertyRef Name="id_coach" />
+    </Key>
+    <Property Name="id_coach" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nom" Type="varchar" MaxLength="100" />
+    <Property Name="prenom" Type="varchar" MaxLength="100" />
+    <Property Name="numero" Type="varchar" MaxLength="10" />
+    <Property Name="sexe" Type="varchar" MaxLength="10" />
+    <Property Name="nom_sport" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="membere">
+    <Key>
+      <PropertyRef Name="id_membere" />
+    </Key>
+    <Property Name="id_membere" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nom" Type="varchar" MaxLength="100" />
+    <Property Name="prenom" Type="varchar" MaxLength="100" />
+    <Property Name="datenaissence" Type="date" />
+    <Property Name="telephone" Type="varchar" MaxLength="10" />
+    <Property Name="sexe" Type="varchar" MaxLength="100" />
+    <Property Name="idsalle" Type="int" />
+  </EntityType>
+  <EntityType Name="offrir">
+    <Key>
+      <PropertyRef Name="id_offrire" />
+    </Key>
+    <Property Name="id_offrire" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="capacity" Type="int" />
+    <Property Name="numsalle" Type="int" />
+    <Property Name="numsport" Type="int" />
+  </EntityType>
+  <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'GestionGym.dbo.participer' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+  <EntityType Name="participer">
+    <Key>
+      <PropertyRef Name="id_participer" />
+    </Key>
+    <Property Name="id_participer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idsport" Type="int" />
+    <Property Name="idmembere" Type="int" />
+  </EntityType>
+  <EntityType Name="salle">
+    <Key>
+      <PropertyRef Name="id_salle" />
+    </Key>
+    <Property Name="id_salle" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="100" />
+    <Property Name="nom" Type="varchar" MaxLength="100" />
+    <Property Name="nom_salle" Type="varchar" MaxLength="100" />
+    <Property Name="motpasse" Type="varchar" MaxLength="100" />
+    <Property Name="Type" Type="varchar" MaxLength="50" />
+    <Property Name="Idadmin" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="sport">
+    <Key>
+      <PropertyRef Name="id_sport" />
+    </Key>
+    <Property Name="id_sport" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nom_sport" Type="varchar" MaxLength="100" />
+    <Property Name="ctaegorie" Type="varchar" MaxLength="100" />
+    <Property Name="idcoach" Type="int" />
+    <Property Name="tarif" Type="int" />
+  </EntityType>
+  <EntityType Name="type_abonnement">
+    <Key>
+      <PropertyRef Name="id_abonnement" />
+    </Key>
+    <Property Name="id_abonnement" Type="int" Nullable="false" />
+    <Property Name="duree" Type="int" />
+    <Property Name="tarifabonnement" Type="int" />
+  </EntityType>
+  <Association Name="FK_abonner_idabonnement">
+    <End Role="type_abonnement" Type="Self.type_abonnement" Multiplicity="0..1" />
+    <End Role="abonner" Type="Self.abonner" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="type_abonnement">
+        <PropertyRef Name="id_abonnement" />
+      </Principal>
+      <Dependent Role="abonner">
+        <PropertyRef Name="idabonnement" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_abonner_idmemmbere">
+    <End Role="membere" Type="Self.membere" Multiplicity="0..1" />
+    <End Role="abonner" Type="Self.abonner" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="membere">
+        <PropertyRef Name="id_membere" />
+      </Principal>
+      <Dependent Role="abonner">
+        <PropertyRef Name="idmembere" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_coach_id">
+    <End Role="coach" Type="Self.coach" Multiplicity="0..1" />
+    <End Role="sport" Type="Self.sport" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="coach">
+        <PropertyRef Name="id_coach" />
+      </Principal>
+      <Dependent Role="sport">
+        <PropertyRef Name="idcoach" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_id_member">
+    <End Role="membere" Type="Self.membere" Multiplicity="0..1" />
+    <End Role="participer" Type="Self.participer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="membere">
+        <PropertyRef Name="id_membere" />
+      </Principal>
+      <Dependent Role="participer">
+        <PropertyRef Name="idmembere" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_id_salle">
+    <End Role="salle" Type="Self.salle" Multiplicity="0..1" />
+    <End Role="offrir" Type="Self.offrir" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="salle">
+        <PropertyRef Name="id_salle" />
+      </Principal>
+      <Dependent Role="offrir">
+        <PropertyRef Name="numsalle" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_id_sport">
+    <End Role="sport" Type="Self.sport" Multiplicity="0..1" />
+    <End Role="offrir" Type="Self.offrir" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sport">
+        <PropertyRef Name="id_sport" />
+      </Principal>
+      <Dependent Role="offrir">
+        <PropertyRef Name="numsport" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_idsport">
+    <End Role="sport" Type="Self.sport" Multiplicity="0..1" />
+    <End Role="participer" Type="Self.participer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sport">
+        <PropertyRef Name="id_sport" />
+      </Principal>
+      <Dependent Role="participer">
+        <PropertyRef Name="idsport" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_member_idsalle">
+    <End Role="salle" Type="Self.salle" Multiplicity="0..1" />
+    <End Role="membere" Type="Self.membere" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="salle">
+        <PropertyRef Name="id_salle" />
+      </Principal>
+      <Dependent Role="membere">
+        <PropertyRef Name="idsalle" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="modifer_member" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idsport" Type="int" Mode="In" />
+    <Parameter Name="idmember" Type="int" Mode="In" />
+    <Parameter Name="idabonnement" Type="int" Mode="In" />
+    <Parameter Name="datedebut" Type="date" Mode="In" />
+    <Parameter Name="datefin" Type="date" Mode="In" />
+    <Parameter Name="prix" Type="int" Mode="In" />
+  </Function>
+  <Function Name="N_M_P_S" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="name" Type="varchar" Mode="In" />
+    <Parameter Name="info" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="spGetactivemember" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="spGetaddmember" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="spGetemember" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="spGetemembers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="spGetfichierRenouvell" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="spGetfichiersport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="spGetinactivemember" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="spGetinfocrystalreport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="spGetmember" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idsalle" Type="int" Mode="In" />
+  </Function>
+  <Function Name="spGetprixaujour" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="spGetprixchoixsport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="sport" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="spGetprixsport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="sport" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="spGetsport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="spmodificationtarif" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="spRenouvelle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idsport" Type="int" Mode="In" />
+    <Parameter Name="idmember" Type="int" Mode="In" />
+    <Parameter Name="idabonnement" Type="int" Mode="In" />
+    <Parameter Name="datedebut" Type="date" Mode="In" />
+    <Parameter Name="dure" Type="int" Mode="In" />
+    <Parameter Name="prix" Type="int" Mode="In" />
+  </Function>
+  <Function Name="supp_coach" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="nomsport" Type="varchar" Mode="In" />
+    <Parameter Name="info" Type="int" Mode="InOut" />
+  </Function>
+  <EntityContainer Name="GestionGymModelStoreContainer">
+    <EntitySet Name="abonner" EntityType="Self.abonner" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="coach" EntityType="Self.coach" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="membere" EntityType="Self.membere" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="offrir" EntityType="Self.offrir" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="salle" EntityType="Self.salle" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sport" EntityType="Self.sport" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="type_abonnement" EntityType="Self.type_abonnement" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="participer" EntityType="Self.participer" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [participer].[id_participer] AS [id_participer], 
+    [participer].[idsport] AS [idsport], 
+    [participer].[idmembere] AS [idmembere]
+    FROM [dbo].[participer] AS [participer]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_abonner_idabonnement" Association="Self.FK_abonner_idabonnement">
+      <End Role="type_abonnement" EntitySet="type_abonnement" />
+      <End Role="abonner" EntitySet="abonner" />
+    </AssociationSet>
+    <AssociationSet Name="FK_abonner_idmemmbere" Association="Self.FK_abonner_idmemmbere">
+      <End Role="membere" EntitySet="membere" />
+      <End Role="abonner" EntitySet="abonner" />
+    </AssociationSet>
+    <AssociationSet Name="FK_coach_id" Association="Self.FK_coach_id">
+      <End Role="coach" EntitySet="coach" />
+      <End Role="sport" EntitySet="sport" />
+    </AssociationSet>
+    <AssociationSet Name="FK_id_member" Association="Self.FK_id_member">
+      <End Role="membere" EntitySet="membere" />
+      <End Role="participer" EntitySet="participer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_id_salle" Association="Self.FK_id_salle">
+      <End Role="salle" EntitySet="salle" />
+      <End Role="offrir" EntitySet="offrir" />
+    </AssociationSet>
+    <AssociationSet Name="FK_id_sport" Association="Self.FK_id_sport">
+      <End Role="sport" EntitySet="sport" />
+      <End Role="offrir" EntitySet="offrir" />
+    </AssociationSet>
+    <AssociationSet Name="FK_idsport" Association="Self.FK_idsport">
+      <End Role="sport" EntitySet="sport" />
+      <End Role="participer" EntitySet="participer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_member_idsalle" Association="Self.FK_member_idsalle">
+      <End Role="salle" EntitySet="salle" />
+      <End Role="membere" EntitySet="membere" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

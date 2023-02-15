@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GESTION_GYMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="abonnement">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="datedebut" Type="DateTime" Precision="0" />
+    <Property Name="datefin" Type="DateTime" Precision="0" />
+    <Property Name="tele_client" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="code_facture" Type="Int32" />
+    <NavigationProperty Name="facture" Relationship="Self.FK_code_facture" FromRole="abonnement" ToRole="facture" />
+    <NavigationProperty Name="client" Relationship="Self.FK_tele_clien" FromRole="abonnement" ToRole="client" />
+  </EntityType>
+  <EntityType Name="client">
+    <Key>
+      <PropertyRef Name="telephone" />
+    </Key>
+    <Property Name="nom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="prenom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="datenaissence" Type="DateTime" Precision="0" />
+    <Property Name="telephone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="id_salle" Type="Int32" />
+    <NavigationProperty Name="abonnements" Relationship="Self.FK_tele_clien" FromRole="client" ToRole="abonnement" />
+    <NavigationProperty Name="salle" Relationship="Self.FK_id_salle" FromRole="client" ToRole="salle" />
+    <NavigationProperty Name="encadres" Relationship="Self.FK_tele_client" FromRole="client" ToRole="encadre" />
+  </EntityType>
+  <EntityType Name="coach">
+    <Key>
+      <PropertyRef Name="telephone" />
+    </Key>
+    <Property Name="nom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="prenom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ctaegorie" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="telephone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="prix" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="id_salle" Type="Int32" />
+    <NavigationProperty Name="salle" Relationship="Self.FK_id_coach" FromRole="coach" ToRole="salle" />
+    <NavigationProperty Name="encadres" Relationship="Self.FK_tele_coach" FromRole="coach" ToRole="encadre" />
+  </EntityType>
+  <EntityType Name="encadre">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tele_client" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="tele_coach" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="client" Relationship="Self.FK_tele_client" FromRole="encadre" ToRole="client" />
+    <NavigationProperty Name="coach" Relationship="Self.FK_tele_coach" FromRole="encadre" ToRole="coach" />
+  </EntityType>
+  <EntityType Name="facture">
+    <Key>
+      <PropertyRef Name="code_facture" />
+    </Key>
+    <Property Name="code_facture" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="prix" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="categoreie" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="abonnements" Relationship="Self.FK_code_facture" FromRole="facture" ToRole="abonnement" />
+  </EntityType>
+  <EntityType Name="salle">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="nom" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="nom_salle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="adresse" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="code_postal" Type="Int32" />
+    <Property Name="ville" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="motpasse" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="clients" Relationship="Self.FK_id_salle" FromRole="salle" ToRole="client" />
+    <NavigationProperty Name="coaches" Relationship="Self.FK_id_coach" FromRole="salle" ToRole="coach" />
+  </EntityType>
+  <Association Name="FK_code_facture">
+    <End Role="facture" Type="Self.facture" Multiplicity="0..1" />
+    <End Role="abonnement" Type="Self.abonnement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="facture">
+        <PropertyRef Name="code_facture" />
+      </Principal>
+      <Dependent Role="abonnement">
+        <PropertyRef Name="code_facture" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tele_clien">
+    <End Role="client" Type="Self.client" Multiplicity="0..1" />
+    <End Role="abonnement" Type="Self.abonnement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="client">
+        <PropertyRef Name="telephone" />
+      </Principal>
+      <Dependent Role="abonnement">
+        <PropertyRef Name="tele_client" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_id_salle">
+    <End Role="salle" Type="Self.salle" Multiplicity="0..1" />
+    <End Role="client" Type="Self.client" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="salle">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="client">
+        <PropertyRef Name="id_salle" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tele_client">
+    <End Role="client" Type="Self.client" Multiplicity="0..1" />
+    <End Role="encadre" Type="Self.encadre" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="client">
+        <PropertyRef Name="telephone" />
+      </Principal>
+      <Dependent Role="encadre">
+        <PropertyRef Name="tele_client" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_id_coach">
+    <End Role="salle" Type="Self.salle" Multiplicity="0..1" />
+    <End Role="coach" Type="Self.coach" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="salle">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="coach">
+        <PropertyRef Name="id_salle" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tele_coach">
+    <End Role="coach" Type="Self.coach" Multiplicity="0..1" />
+    <End Role="encadre" Type="Self.encadre" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="coach">
+        <PropertyRef Name="telephone" />
+      </Principal>
+      <Dependent Role="encadre">
+        <PropertyRef Name="tele_coach" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="GESTION_GYMEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="abonnements" EntityType="Self.abonnement" />
+    <EntitySet Name="clients" EntityType="Self.client" />
+    <EntitySet Name="coaches" EntityType="Self.coach" />
+    <EntitySet Name="encadres" EntityType="Self.encadre" />
+    <EntitySet Name="factures" EntityType="Self.facture" />
+    <EntitySet Name="salles" EntityType="Self.salle" />
+    <AssociationSet Name="FK_code_facture" Association="Self.FK_code_facture">
+      <End Role="facture" EntitySet="factures" />
+      <End Role="abonnement" EntitySet="abonnements" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tele_clien" Association="Self.FK_tele_clien">
+      <End Role="client" EntitySet="clients" />
+      <End Role="abonnement" EntitySet="abonnements" />
+    </AssociationSet>
+    <AssociationSet Name="FK_id_salle" Association="Self.FK_id_salle">
+      <End Role="salle" EntitySet="salles" />
+      <End Role="client" EntitySet="clients" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tele_client" Association="Self.FK_tele_client">
+      <End Role="client" EntitySet="clients" />
+      <End Role="encadre" EntitySet="encadres" />
+    </AssociationSet>
+    <AssociationSet Name="FK_id_coach" Association="Self.FK_id_coach">
+      <End Role="salle" EntitySet="salles" />
+      <End Role="coach" EntitySet="coaches" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tele_coach" Association="Self.FK_tele_coach">
+      <End Role="coach" EntitySet="coaches" />
+      <End Role="encadre" EntitySet="encadres" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

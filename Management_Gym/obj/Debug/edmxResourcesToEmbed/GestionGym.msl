@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="GESTION_GYMModelStoreContainer" CdmEntityContainer="GESTION_GYMEntities">
+    <EntitySetMapping Name="abonnements">
+      <EntityTypeMapping TypeName="GESTION_GYMModel.abonnement">
+        <MappingFragment StoreEntitySet="abonnement">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="datedebut" ColumnName="datedebut" />
+          <ScalarProperty Name="datefin" ColumnName="datefin" />
+          <ScalarProperty Name="tele_client" ColumnName="tele_client" />
+          <ScalarProperty Name="code_facture" ColumnName="code_facture" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="clients">
+      <EntityTypeMapping TypeName="GESTION_GYMModel.client">
+        <MappingFragment StoreEntitySet="client">
+          <ScalarProperty Name="nom" ColumnName="nom" />
+          <ScalarProperty Name="prenom" ColumnName="prenom" />
+          <ScalarProperty Name="datenaissence" ColumnName="datenaissence" />
+          <ScalarProperty Name="telephone" ColumnName="telephone" />
+          <ScalarProperty Name="id_salle" ColumnName="id_salle" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="coaches">
+      <EntityTypeMapping TypeName="GESTION_GYMModel.coach">
+        <MappingFragment StoreEntitySet="coach">
+          <ScalarProperty Name="nom" ColumnName="nom" />
+          <ScalarProperty Name="prenom" ColumnName="prenom" />
+          <ScalarProperty Name="ctaegorie" ColumnName="ctaegorie" />
+          <ScalarProperty Name="telephone" ColumnName="telephone" />
+          <ScalarProperty Name="prix" ColumnName="prix" />
+          <ScalarProperty Name="id_salle" ColumnName="id_salle" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="encadres">
+      <EntityTypeMapping TypeName="GESTION_GYMModel.encadre">
+        <MappingFragment StoreEntitySet="encadre">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="tele_client" ColumnName="tele_client" />
+          <ScalarProperty Name="tele_coach" ColumnName="tele_coach" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="factures">
+      <EntityTypeMapping TypeName="GESTION_GYMModel.facture">
+        <MappingFragment StoreEntitySet="facture">
+          <ScalarProperty Name="code_facture" ColumnName="code_facture" />
+          <ScalarProperty Name="prix" ColumnName="prix" />
+          <ScalarProperty Name="categoreie" ColumnName="categoreie" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="salles">
+      <EntityTypeMapping TypeName="GESTION_GYMModel.salle">
+        <MappingFragment StoreEntitySet="salle">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="nom" ColumnName="nom" />
+          <ScalarProperty Name="nom_salle" ColumnName="nom_salle" />
+          <ScalarProperty Name="adresse" ColumnName="adresse" />
+          <ScalarProperty Name="code_postal" ColumnName="code_postal" />
+          <ScalarProperty Name="ville" ColumnName="ville" />
+          <ScalarProperty Name="motpasse" ColumnName="motpasse" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

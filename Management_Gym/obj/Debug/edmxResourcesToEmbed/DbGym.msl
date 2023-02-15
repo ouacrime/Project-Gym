@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="GestionGymModelStoreContainer" CdmEntityContainer="GestionGymEntities">
+    <FunctionImportMapping FunctionImportName="modifer_member" FunctionName="GestionGymModel.Store.modifer_member" />
+    <FunctionImportMapping FunctionImportName="N_M_P_S" FunctionName="GestionGymModel.Store.N_M_P_S" />
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="GestionGymModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="GestionGymModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="GestionGymModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="GestionGymModel.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GestionGymModel.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="GestionGymModel.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GestionGymModel.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="GestionGymModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="GestionGymModel.Store.sp_upgraddiagrams" />
+    <FunctionImportMapping FunctionImportName="spGetactivemember" FunctionName="GestionGymModel.Store.spGetactivemember" />
+    <FunctionImportMapping FunctionImportName="spGetaddmember" FunctionName="GestionGymModel.Store.spGetaddmember" />
+    <FunctionImportMapping FunctionImportName="spGetemember" FunctionName="GestionGymModel.Store.spGetemember" />
+    <FunctionImportMapping FunctionImportName="spGetemembers" FunctionName="GestionGymModel.Store.spGetemembers" />
+    <FunctionImportMapping FunctionImportName="spGetfichierRenouvell" FunctionName="GestionGymModel.Store.spGetfichierRenouvell">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GestionGymModel.spGetfichierRenouvell_Result">
+          <ScalarProperty Name="prenom" ColumnName="prenom" />
+          <ScalarProperty Name="nom" ColumnName="nom" />
+          <ScalarProperty Name="nom_sport" ColumnName="nom_sport" />
+          <ScalarProperty Name="duree" ColumnName="duree" />
+          <ScalarProperty Name="tarif" ColumnName="tarif" />
+          <ScalarProperty Name="id_sport" ColumnName="id_sport" />
+          <ScalarProperty Name="idabonnement" ColumnName="idabonnement" />
+          <ScalarProperty Name="id_membere" ColumnName="id_membere" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spGetfichiersport" FunctionName="GestionGymModel.Store.spGetfichiersport">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GestionGymModel.spGetfichiersport_Result">
+          <ScalarProperty Name="id_sport" ColumnName="id_sport" />
+          <ScalarProperty Name="nom_sport" ColumnName="nom_sport" />
+          <ScalarProperty Name="ctaegorie" ColumnName="ctaegorie" />
+          <ScalarProperty Name="capacity" ColumnName="capacity" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spGetinactivemember" FunctionName="GestionGymModel.Store.spGetinactivemember" />
+    <FunctionImportMapping FunctionImportName="spGetmember" FunctionName="GestionGymModel.Store.spGetmember">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GestionGymModel.spGetmember_Result">
+          <ScalarProperty Name="prenom" ColumnName="prenom" />
+          <ScalarProperty Name="nom" ColumnName="nom" />
+          <ScalarProperty Name="datenaissence" ColumnName="datenaissence" />
+          <ScalarProperty Name="telephone" ColumnName="telephone" />
+          <ScalarProperty Name="sexe" ColumnName="sexe" />
+          <ScalarProperty Name="nom_sport" ColumnName="nom_sport" />
+          <ScalarProperty Name="id_membere" ColumnName="id_membere" />
+          <ScalarProperty Name="datedebut" ColumnName="datedebut" />
+          <ScalarProperty Name="datefin" ColumnName="datefin" />
+          <ScalarProperty Name="duree" ColumnName="duree" />
+          <ScalarProperty Name="tarifabonnement" ColumnName="tarifabonnement" />
+          <ScalarProperty Name="idabonnement" ColumnName="idabonnement" />
+          <ScalarProperty Name="id_sport" ColumnName="id_sport" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="spGetprixaujour" FunctionName="GestionGymModel.Store.spGetprixaujour" />
+    <FunctionImportMapping FunctionImportName="spGetprixchoixsport" FunctionName="GestionGymModel.Store.spGetprixchoixsport" />
+    <FunctionImportMapping FunctionImportName="spGetprixsport" FunctionName="GestionGymModel.Store.spGetprixsport" />
+    <FunctionImportMapping FunctionImportName="spGetsport" FunctionName="GestionGymModel.Store.spGetsport" />
+    <FunctionImportMapping FunctionImportName="spmodificationtarif" FunctionName="GestionGymModel.Store.spmodificationtarif" />
+    <FunctionImportMapping FunctionImportName="spRenouvelle" FunctionName="GestionGymModel.Store.spRenouvelle" />
+    <FunctionImportMapping FunctionImportName="supp_coach" FunctionName="GestionGymModel.Store.supp_coach" />
+    <FunctionImportMapping FunctionImportName="spGetinfocrystalreport" FunctionName="GestionGymModel.Store.spGetinfocrystalreport">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="GestionGymModel.spGetinfocrystalreport_Result">
+          <ScalarProperty Name="nom" ColumnName="nom" />
+          <ScalarProperty Name="prenom" ColumnName="prenom" />
+          <ScalarProperty Name="nom_sport" ColumnName="nom_sport" />
+          <ScalarProperty Name="datefin" ColumnName="datefin" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="abonners">
+      <EntityTypeMapping TypeName="GestionGymModel.abonner">
+        <MappingFragment StoreEntitySet="abonner">
+          <ScalarProperty Name="idabonnement" ColumnName="idabonnement" />
+          <ScalarProperty Name="idmembere" ColumnName="idmembere" />
+          <ScalarProperty Name="datefin" ColumnName="datefin" />
+          <ScalarProperty Name="datedebut" ColumnName="datedebut" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="coaches">
+      <EntityTypeMapping TypeName="GestionGymModel.coach">
+        <MappingFragment StoreEntitySet="coach">
+          <ScalarProperty Name="nom_sport" ColumnName="nom_sport" />
+          <ScalarProperty Name="sexe" ColumnName="sexe" />
+          <ScalarProperty Name="numero" ColumnName="numero" />
+          <ScalarProperty Name="prenom" ColumnName="prenom" />
+          <ScalarProperty Name="nom" ColumnName="nom" />
+          <ScalarProperty Name="id_coach" ColumnName="id_coach" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="memberes">
+      <EntityTypeMapping TypeName="GestionGymModel.membere">
+        <MappingFragment StoreEntitySet="membere">
+          <ScalarProperty Name="idsalle" ColumnName="idsalle" />
+          <ScalarProperty Name="sexe" ColumnName="sexe" />
+          <ScalarProperty Name="telephone" ColumnName="telephone" />
+          <ScalarProperty Name="datenaissence" ColumnName="datenaissence" />
+          <ScalarProperty Name="prenom" ColumnName="prenom" />
+          <ScalarProperty Name="nom" ColumnName="nom" />
+          <ScalarProperty Name="id_membere" ColumnName="id_membere" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="offrirs">
+      <EntityTypeMapping TypeName="GestionGymModel.offrir">
+        <MappingFragment StoreEntitySet="offrir">
+          <ScalarProperty Name="numsport" ColumnName="numsport" />
+          <ScalarProperty Name="numsalle" ColumnName="numsalle" />
+          <ScalarProperty Name="capacity" ColumnName="capacity" />
+          <ScalarProperty Name="id_offrire" ColumnName="id_offrire" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="salles">
+      <EntityTypeMapping TypeName="GestionGymModel.salle">
+        <MappingFragment StoreEntitySet="salle">
+          <ScalarProperty Name="Idadmin" ColumnName="Idadmin" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="motpasse" ColumnName="motpasse" />
+          <ScalarProperty Name="nom_salle" ColumnName="nom_salle" />
+          <ScalarProperty Name="nom" ColumnName="nom" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="id_salle" ColumnName="id_salle" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sports">
+      <EntityTypeMapping TypeName="GestionGymModel.sport">
+        <MappingFragment StoreEntitySet="sport">
+          <ScalarProperty Name="tarif" ColumnName="tarif" />
+          <ScalarProperty Name="idcoach" ColumnName="idcoach" />
+          <ScalarProperty Name="ctaegorie" ColumnName="ctaegorie" />
+          <ScalarProperty Name="nom_sport" ColumnName="nom_sport" />
+          <ScalarProperty Name="id_sport" ColumnName="id_sport" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="type_abonnement">
+      <EntityTypeMapping TypeName="GestionGymModel.type_abonnement">
+        <MappingFragment StoreEntitySet="type_abonnement">
+          <ScalarProperty Name="tarifabonnement" ColumnName="tarifabonnement" />
+          <ScalarProperty Name="duree" ColumnName="duree" />
+          <ScalarProperty Name="id_abonnement" ColumnName="id_abonnement" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="participers">
+      <EntityTypeMapping TypeName="GestionGymModel.participer">
+        <MappingFragment StoreEntitySet="participer">
+          <ScalarProperty Name="idmembere" ColumnName="idmembere" />
+          <ScalarProperty Name="idsport" ColumnName="idsport" />
+          <ScalarProperty Name="id_participer" ColumnName="id_participer" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
